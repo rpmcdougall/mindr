@@ -1,0 +1,24 @@
+trigger:
+- main
+- dev
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- script: |
+    sudo apt-get install wget ca-certificates
+    wget https://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb && sudo dpkg -i erlang-solutions_1.0_all.deb
+    sudo apt-get update
+    sudo apt-get install esl-erlang
+    sudo apt-get install elixir
+    mix local.hex --force
+    mix local.rebar --force
+  displayName: 'Setup'
+
+- script: |
+    set MIX_ENV=test
+    mix deps.get
+    mix deps.compile
+    mix test
+  displayName: 'mindr.app'
+
