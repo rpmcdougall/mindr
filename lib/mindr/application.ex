@@ -11,7 +11,8 @@ defmodule Mindr.Application do
       # Starts a worker by calling: Mindr.Worker.start_link(arg)
       # {Mindr.Worker, arg}
       Mindr.Consumer.ReminderConsumer,
-      Mindr.Consumer.TimerConsumer
+        Mindr.Consumer.TimerConsumer,
+        Reminders.Repo
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
